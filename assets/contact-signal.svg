@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 820" role="img" aria-labelledby="title desc" data-small-node-network="contact">
+  <title id="title">KI Netzwerk</title>
+  <desc id="desc">Kleine vernetzte Punkte bilden ein feines KI-Netzwerk.</desc>
+  <rect width="760" height="820" fill="#0A0A0A"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 218 188 154 286 196 374 126 486 184 594 138 674 230" stroke="#FBFBFB" stroke-width="3" opacity=".74"/>
+    <path d="M104 218 168 306 264 284 286 196 392 276 486 184 552 302 674 230" stroke="#FBFBFB" stroke-width="3" opacity=".68"/>
+    <path d="M168 306 92 424 214 468 264 284 392 276 458 392 552 302 648 418" stroke="#FBFBFB" stroke-width="3" opacity=".72"/>
+    <path d="M214 468 326 548 458 392 552 302 648 418 594 556 474 596 326 548" stroke="#FBFBFB" stroke-width="3" opacity=".62"/>
+    <path d="M92 424 146 596 326 548 474 596 594 556 668 666" stroke="#CF1C18" stroke-width="3" opacity=".82"/>
+    <path d="M188 154 264 284 214 468 146 596" stroke="#CF1C18" stroke-width="3" opacity=".78"/>
+    <path d="M374 126 392 276 458 392 474 596" stroke="#FBFBFB" stroke-width="3" opacity=".58"/>
+    <path d="M486 184 392 276 264 284 168 306" stroke="#FBFBFB" stroke-width="3" opacity=".52"/>
+    <path d="M214 468 458 392 648 418" stroke="#FBFBFB" stroke-width="3" opacity=".5"/>
+  </g>
+  <g stroke-width="2.5">
+    <circle cx="104" cy="218" r="7" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="188" cy="154" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="286" cy="196" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="374" cy="126" r="7" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="486" cy="184" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="594" cy="138" r="6" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="674" cy="230" r="7" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="168" cy="306" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="264" cy="284" r="7" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="392" cy="276" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="552" cy="302" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="92" cy="424" r="7" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="214" cy="468" r="6" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="458" cy="392" r="7" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="648" cy="418" r="6" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="146" cy="596" r="7" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="326" cy="548" r="6" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="474" cy="596" r="7" fill="#FBFBFB" stroke="#FBFBFB"/>
+    <circle cx="594" cy="556" r="6" fill="#CF1C18" stroke="#FBFBFB"/>
+    <circle cx="668" cy="666" r="7" fill="#FBFBFB" stroke="#FBFBFB"/>
+  </g>
+</svg>
