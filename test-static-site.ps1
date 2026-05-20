@@ -7,6 +7,7 @@ $datenschutzPath = Join-Path $root "datenschutz.html"
 $cnamePath = Join-Path $root "CNAME"
 $sitemapPath = Join-Path $root "sitemap.xml"
 $robotsPath = Join-Path $root "robots.txt"
+$llmsPath = Join-Path $root "llms.txt"
 $stylesPath = Join-Path $root "styles.css"
 $assetsPath = Join-Path $root "assets"
 $portraitPath = Join-Path $assetsPath "andrei-chiriches-portrait.jpeg"
@@ -40,6 +41,7 @@ Assert-True (Test-Path $datenschutzPath) "datenschutz.html is missing"
 Assert-True (Test-Path $cnamePath) "CNAME is missing"
 Assert-True (Test-Path $sitemapPath) "sitemap.xml is missing"
 Assert-True (Test-Path $robotsPath) "robots.txt is missing"
+Assert-True (Test-Path $llmsPath) "llms.txt is missing"
 Assert-True (Test-Path $stylesPath) "styles.css is missing"
 Assert-True (Test-Path $assetsPath) "assets directory is missing"
 Assert-True (Test-Path $portraitPath) "Portrait image is missing"
@@ -54,6 +56,7 @@ $datenschutzHtml = Read-Utf8 $datenschutzPath
 $cname = (Read-Utf8 $cnamePath).Trim()
 $sitemap = Read-Utf8 $sitemapPath
 $robots = Read-Utf8 $robotsPath
+$llms = Read-Utf8 $llmsPath
 $css = Read-Utf8 $stylesPath
 $contactSvg = Read-Utf8 $contactSignalPath
 $topicsSvg = Read-Utf8 $topicsGraphicPath
@@ -64,9 +67,13 @@ $datenschutzText = ($datenschutzHtml -replace "<[^>]+>", " ") -replace "\s+", " 
 
 Assert-True ($html -match '<html lang="de">') "German document language is missing"
 Assert-True ($cname -eq "andrei-chiriches.com") "GitHub Pages CNAME should point to andrei-chiriches.com"
-Assert-True ($robots -match "User-agent: \*" -and $robots -match "Allow: /" -and $robots -match "Sitemap: https://andrei-chiriches\.com/sitemap\.xml") "robots.txt should allow crawling and reference the sitemap"
+Assert-True ($robots -match "User-agent: \*" -and $robots -match "Allow: /" -and $robots -match "Sitemap: https://andrei-chiriches\.com/sitemap\.xml" -and $robots -match "LLMs: https://andrei-chiriches\.com/llms\.txt") "robots.txt should allow crawling and reference the sitemap and llms file"
 Assert-True ($sitemap -match "<urlset" -and $sitemap -match "<loc>https://andrei-chiriches\.com/</loc>" -and $sitemap -match "<loc>https://andrei-chiriches\.com/impressum\.html</loc>" -and $sitemap -match "<loc>https://andrei-chiriches\.com/datenschutz\.html</loc>") "sitemap.xml should list the public pages"
 Assert-True ($html -match '<meta charset="utf-8">') "UTF-8 charset is missing"
+Assert-True ($html -match '<link rel="canonical" href="https://andrei-chiriches\.com/">') "Canonical link is missing from index"
+Assert-True ($html -match 'property="og:title"' -and $html -match 'property="og:description"' -and $html -match 'property="og:image"' -and $html -match 'name="twitter:card"') "Social sharing meta tags are missing"
+Assert-True ($html -match 'application/ld\+json' -and $html -match '"@type": "Person"' -and $html -match '"jobTitle": "Keynote Speaker"' -and $html -match '"knowsAbout"') "Structured data is missing"
+Assert-True ($llms -match "# Andrei Chiriches" -and $llms -match "KI, Behinderung und Teilhabe" -and $llms -match "https://andrei-chiriches\.com/" -and $llms -match "contact@andrei-chiriches\.com") "llms.txt should summarize the website for AI systems"
 Assert-True ($html -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $html -match '<link rel="apple-touch-icon" href="assets/favicon\.png">') "Favicon links are missing from index"
 Assert-True ($impressumHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $datenschutzHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">') "Favicon links are missing from legal pages"
 Assert-True ($plainText -match "Wenn KI Barrieren abbaut") "Hero headline is missing"
@@ -114,7 +121,7 @@ Assert-True ($plainText -match "F${ue}r Unternehmen, Konferenzen, Hochschulen, V
 Assert-True ($html -notmatch 'class="red-section"' -and $html -notmatch 'class="audience-list"') "Large red audience section should not remain"
 Assert-True ($css -match "\.audience-band" -and $css -match "\.audience-band-inner" -and $css -match "\.audience-tag" -and $css -notmatch "\.red-section") "Compact audience band styles are missing"
 Assert-True ($html -match "<details" -and $html -match "<summary") "Native expandable FAQ/details are missing"
-Assert-True ([regex]::Matches($html, "<script").Count -eq 1) "Page should only include the contact form enhancement script"
+Assert-True ([regex]::Matches($html, "<script").Count -eq 2 -and $html -notmatch '<script[^>]+src=') "Page should only include local contact enhancement and structured data scripts"
 Assert-True ($impressumHtml -match '<html lang="de">' -and $datenschutzHtml -match '<html lang="de">') "Legal pages should use German document language"
 Assert-True ($impressumHtml -match '<meta charset="utf-8">' -and $datenschutzHtml -match '<meta charset="utf-8">') "Legal pages should use UTF-8"
 Assert-True ($impressumText -match "Impressum" -and $impressumText -match "Andrei Chiriches" -and $impressumText -match "Passau" -and $impressumText -match "contact@andrei-chiriches\.com") "Impressum content is incomplete"

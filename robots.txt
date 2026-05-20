@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://andrei-chiriches.com/sitemap.xml
+LLMs: https://andrei-chiriches.com/llms.txt
