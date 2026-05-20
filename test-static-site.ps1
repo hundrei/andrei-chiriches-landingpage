@@ -11,6 +11,7 @@ $portraitPath = Join-Path $assetsPath "andrei-chiriches-portrait.jpeg"
 $aboutPortraitPath = Join-Path $assetsPath "ich.png"
 $contactSignalPath = Join-Path $assetsPath "contact-signal.svg"
 $topicsGraphicPath = Join-Path $assetsPath "topics-barriers.svg"
+$faviconPath = Join-Path $assetsPath "favicon.png"
 $utf8 = [System.Text.UTF8Encoding]::new($false, $true)
 $ae = [char]0x00E4
 $oe = [char]0x00F6
@@ -41,6 +42,7 @@ Assert-True (Test-Path $portraitPath) "Portrait image is missing"
 Assert-True (Test-Path $aboutPortraitPath) "About profile image is missing"
 Assert-True (Test-Path $contactSignalPath) "Contact signal graphic is missing"
 Assert-True (Test-Path $topicsGraphicPath) "Topics graphic is missing"
+Assert-True (Test-Path $faviconPath) "Favicon logo is missing"
 
 $html = Read-Utf8 $indexPath
 $impressumHtml = Read-Utf8 $impressumPath
@@ -57,6 +59,8 @@ $datenschutzText = ($datenschutzHtml -replace "<[^>]+>", " ") -replace "\s+", " 
 Assert-True ($html -match '<html lang="de">') "German document language is missing"
 Assert-True ($cname -eq "andrei-chiriches.com") "GitHub Pages CNAME should point to andrei-chiriches.com"
 Assert-True ($html -match '<meta charset="utf-8">') "UTF-8 charset is missing"
+Assert-True ($html -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $html -match '<link rel="apple-touch-icon" href="assets/favicon\.png">') "Favicon links are missing from index"
+Assert-True ($impressumHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $datenschutzHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">') "Favicon links are missing from legal pages"
 Assert-True ($plainText -match "Wenn KI Barrieren abbaut") "Hero headline is missing"
 Assert-True ($plainText -match "Vortr${ae}ge" -and $plainText -match "${Ue}ber mich" -and $plainText -match "F${ue}r wen") "German umlauts are missing"
 Assert-True ($plainText -match "Andrei Chiriche${sComma}") "Correct speaker name is missing"
