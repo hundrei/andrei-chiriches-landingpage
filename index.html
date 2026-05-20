@@ -223,6 +223,7 @@
             <textarea id="form-message" name="message" rows="5" required></textarea>
           </div>
           <button class="button button-primary contact-submit" type="submit">Vortrag anfragen</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite" hidden>Danke, Ihre Anfrage wurde gesendet. Ich melde mich so schnell wie möglich zurück.</p>
         </form>
         <div class="contact-actions">
           <a class="button button-secondary" href="https://www.linkedin.com/in/andrei-chiriches/" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -244,5 +245,44 @@
     </div>
     <a href="mailto:contact@andrei-chiriches.com">contact@andrei-chiriches.com</a>
   </footer>
+  <script>
+    const form = document.getElementById("kontaktformular");
+    const statusMessage = document.getElementById("form-status");
+    const submitButton = form.querySelector(".contact-submit");
+    const defaultButtonText = submitButton.textContent;
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      statusMessage.hidden = true;
+      statusMessage.classList.remove("is-error");
+      submitButton.disabled = true;
+      submitButton.textContent = "Wird gesendet...";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {
+            Accept: "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Formular konnte nicht gesendet werden.");
+        }
+
+        form.reset();
+        statusMessage.textContent = "Danke, Ihre Anfrage wurde gesendet. Ich melde mich so schnell wie möglich zurück.";
+        statusMessage.hidden = false;
+      } catch (error) {
+        statusMessage.textContent = "Das hat leider nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie direkt an contact@andrei-chiriches.com.";
+        statusMessage.classList.add("is-error");
+        statusMessage.hidden = false;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonText;
+      }
+    });
+  </script>
 </body>
 </html>
