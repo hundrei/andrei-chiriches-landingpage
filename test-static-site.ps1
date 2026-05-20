@@ -107,6 +107,8 @@ Assert-True ($impressumHtml -match '<html lang="de">' -and $datenschutzHtml -mat
 Assert-True ($impressumHtml -match '<meta charset="utf-8">' -and $datenschutzHtml -match '<meta charset="utf-8">') "Legal pages should use UTF-8"
 Assert-True ($impressumText -match "Impressum" -and $impressumText -match "Andrei Chiriches" -and $impressumText -match "Passau" -and $impressumText -match "contact@andrei-chiriches\.com") "Impressum content is incomplete"
 Assert-True ($datenschutzText -match "Datenschutz" -and $datenschutzText -match "Andrei Chiriches" -and $datenschutzText -match "contact@andrei-chiriches\.com" -and $datenschutzText -match "Keine Cookies" -and $datenschutzText -match "Keine Analyse") "Privacy content is incomplete"
+Assert-True ($datenschutzText -match "Kontaktformular" -and $datenschutzText -match "Web3Forms" -and $datenschutzText -match "Name, E-Mail-Adresse, Organisation und Nachricht" -and $datenschutzText -match "erst beim Absenden des Formulars") "Privacy policy should describe the Web3Forms contact form"
+Assert-True ($datenschutzText -notmatch "kein Kontaktformular") "Privacy policy should not claim there is no contact form"
 Assert-True ($impressumHtml -notmatch "<script" -and $datenschutzHtml -notmatch "<script") "Legal pages should not include JavaScript"
 Assert-True ($css -match "\.legal-page" -and $css -match "\.legal-content" -and $css -match "\.legal-nav") "Legal page styles are missing"
 Assert-True ($contactSvg -match "KI Netzwerk" -and $contactSvg -match "data-small-node-network") "Contact graphic should use a small connected-dot network motif"
