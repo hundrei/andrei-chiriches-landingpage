@@ -5,6 +5,8 @@ $indexPath = Join-Path $root "index.html"
 $impressumPath = Join-Path $root "impressum.html"
 $datenschutzPath = Join-Path $root "datenschutz.html"
 $cnamePath = Join-Path $root "CNAME"
+$sitemapPath = Join-Path $root "sitemap.xml"
+$robotsPath = Join-Path $root "robots.txt"
 $stylesPath = Join-Path $root "styles.css"
 $assetsPath = Join-Path $root "assets"
 $portraitPath = Join-Path $assetsPath "andrei-chiriches-portrait.jpeg"
@@ -36,6 +38,8 @@ Assert-True (Test-Path $indexPath) "index.html is missing"
 Assert-True (Test-Path $impressumPath) "impressum.html is missing"
 Assert-True (Test-Path $datenschutzPath) "datenschutz.html is missing"
 Assert-True (Test-Path $cnamePath) "CNAME is missing"
+Assert-True (Test-Path $sitemapPath) "sitemap.xml is missing"
+Assert-True (Test-Path $robotsPath) "robots.txt is missing"
 Assert-True (Test-Path $stylesPath) "styles.css is missing"
 Assert-True (Test-Path $assetsPath) "assets directory is missing"
 Assert-True (Test-Path $portraitPath) "Portrait image is missing"
@@ -48,6 +52,8 @@ $html = Read-Utf8 $indexPath
 $impressumHtml = Read-Utf8 $impressumPath
 $datenschutzHtml = Read-Utf8 $datenschutzPath
 $cname = (Read-Utf8 $cnamePath).Trim()
+$sitemap = Read-Utf8 $sitemapPath
+$robots = Read-Utf8 $robotsPath
 $css = Read-Utf8 $stylesPath
 $contactSvg = Read-Utf8 $contactSignalPath
 $topicsSvg = Read-Utf8 $topicsGraphicPath
@@ -58,6 +64,8 @@ $datenschutzText = ($datenschutzHtml -replace "<[^>]+>", " ") -replace "\s+", " 
 
 Assert-True ($html -match '<html lang="de">') "German document language is missing"
 Assert-True ($cname -eq "andrei-chiriches.com") "GitHub Pages CNAME should point to andrei-chiriches.com"
+Assert-True ($robots -match "User-agent: \*" -and $robots -match "Allow: /" -and $robots -match "Sitemap: https://andrei-chiriches\.com/sitemap\.xml") "robots.txt should allow crawling and reference the sitemap"
+Assert-True ($sitemap -match "<urlset" -and $sitemap -match "<loc>https://andrei-chiriches\.com/</loc>" -and $sitemap -match "<loc>https://andrei-chiriches\.com/impressum\.html</loc>" -and $sitemap -match "<loc>https://andrei-chiriches\.com/datenschutz\.html</loc>") "sitemap.xml should list the public pages"
 Assert-True ($html -match '<meta charset="utf-8">') "UTF-8 charset is missing"
 Assert-True ($html -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $html -match '<link rel="apple-touch-icon" href="assets/favicon\.png">') "Favicon links are missing from index"
 Assert-True ($impressumHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">' -and $datenschutzHtml -match '<link rel="icon" type="image/png" href="assets/favicon\.png">') "Favicon links are missing from legal pages"
