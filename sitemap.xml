@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://andrei-chiriches.com/</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-05-24</lastmod>
+    <image:image>
+      <image:loc>https://andrei-chiriches.com/assets/andrei-chiriches-portrait.jpeg</image:loc>
+      <image:title>Andrei Chiricheș im Rollstuhl</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://andrei-chiriches.com/impressum.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-05-24</lastmod>
   </url>
   <url>
     <loc>https://andrei-chiriches.com/datenschutz.html</loc>
-    <lastmod>2026-05-20</lastmod>
+    <lastmod>2026-05-24</lastmod>
   </url>
 </urlset>
